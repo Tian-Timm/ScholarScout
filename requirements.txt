@@ -1,0 +1,11 @@
+scrapegraphai
+beautifulsoup4
+pandas
+requests
+xlsxwriter
+playwright
+python-dotenv
+openai
+thefuzz
+streamlit
+openpyxl
