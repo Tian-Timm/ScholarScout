@@ -1,4 +1,5 @@
 🎓 ScholarScout
+<p align="center"> <strong>AI-powered Faculty Intelligence & Academic Profiling Tool</strong>
 
 AI-powered Faculty Intelligence & Academic Profiling Tool
 基于 AI 的高校教师信息采集与研究画像工具
