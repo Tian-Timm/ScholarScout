@@ -4,10 +4,14 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-client = OpenAI(
-    api_key=os.getenv("DEEPSEEK_API_KEY"),
-    base_url="https://api.deepseek.com"
-)
+def get_client():
+    api_key = os.getenv("DEEPSEEK_API_KEY")
+    if not api_key:
+        raise ValueError("DeepSeek API Key not found. Please set it in the sidebar.")
+    return OpenAI(
+        api_key=api_key,
+        base_url="https://api.deepseek.com"
+    )
 
 def summarize_from_papers(papers: list, name: str | None = None, language: str = "zh") -> str:
     titles = []

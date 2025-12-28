@@ -8,7 +8,7 @@ from scraper import scrape_faculty_list, get_profile_data
 from s2_client import search_and_fetch_papers
 from llm_engine import summarize_from_papers, summarize_from_bio
 
-def process_faculty_url(url, university_name, url_pattern_hint=None):
+def process_faculty_url(url, university_name, url_pattern_hint=None, language="zh"):
     """
     Main orchestration function.
     """
