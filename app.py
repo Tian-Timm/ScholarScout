@@ -4,6 +4,14 @@ import datetime
 import os
 import subprocess
 import sys
+import importlib.metadata
+
+# === 1. 页面基础配置 (Moved to top for error handling) ===
+st.set_page_config(
+    page_title="ScholarScout Dashboard",
+    page_icon="🎓",
+    layout="wide"
+)
 
 # === Playwright Installation for Streamlit Cloud ===
 @st.cache_resource
@@ -18,8 +26,28 @@ def install_playwright_browsers():
 # Run installation once
 install_playwright_browsers()
 
-# 引入你的后端函数
-from main import process_faculty_url 
+# 引入你的后端函数 (Wrapped with error handling)
+try:
+    from main import process_faculty_url
+except ImportError as e:
+    st.error(f"❌ Critical Import Error: {e}")
+    st.error("Please check the logs for version details or try rebooting the app.")
+    
+    # Debug info
+    st.divider()
+    st.subheader("🛠 Debug Information")
+    try:
+        debug_info = {
+            "langchain": importlib.metadata.version("langchain"),
+            "langchain_core": importlib.metadata.version("langchain_core"),
+            "scrapegraphai": importlib.metadata.version("scrapegraphai"),
+            "python": sys.version
+        }
+        st.json(debug_info)
+    except Exception as debug_err:
+        st.warning(f"Could not retrieve version info: {debug_err}")
+    
+    st.stop()
 
 # === 0. 多语言配置 (Localization) ===
 LANG = {
@@ -85,12 +113,7 @@ LANG = {
     }
 }
 
-# === 1. 页面基础配置 ===
-st.set_page_config(
-    page_title="ScholarScout Dashboard",
-    page_icon="🎓",
-    layout="wide"
-)
+
 
 # 语言选择器放在侧边栏最上方
 with st.sidebar:
