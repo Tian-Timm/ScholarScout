@@ -2,6 +2,22 @@ import streamlit as st
 import pandas as pd
 import datetime
 import os
+import subprocess
+import sys
+
+# === Playwright Installation for Streamlit Cloud ===
+@st.cache_resource
+def install_playwright_browsers():
+    print("⬇️ Installing Playwright browsers...")
+    try:
+        subprocess.run([sys.executable, "-m", "playwright", "install", "chromium"], check=True)
+        print("✅ Playwright browsers installed.")
+    except Exception as e:
+        print(f"❌ Failed to install Playwright browsers: {e}")
+
+# Run installation once
+install_playwright_browsers()
+
 # 引入你的后端函数
 from main import process_faculty_url 
 

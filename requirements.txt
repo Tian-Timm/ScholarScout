@@ -9,3 +9,6 @@ openai
 thefuzz
 streamlit
 openpyxl
+langchain<0.3.0
+langchain-core<0.3.0
+langchain-community<0.3.0
